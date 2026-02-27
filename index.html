@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seguimiento de tareas de proyectos</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>Seguimiento de tareas de proyectos</h1>
+        <p>Organiza el flujo de trabajo por estados y visualiza cada tarea.</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="add-lane-button" class="btn secondary">+ Añadir carril</button>
+        <button id="add-task-button" class="btn primary">+ Añadir tarea</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="board" class="board" aria-label="Tablero de estados"></section>
+    </main>
+
+    <dialog id="lane-dialog" class="dialog">
+      <form id="lane-form" method="dialog" class="dialog-form">
+        <h2>Nuevo carril</h2>
+        <label>
+          Nombre del carril
+          <input id="lane-name" name="laneName" type="text" required maxlength="40" placeholder="Ej. Validación legal" />
+        </label>
+        <menu>
+          <button value="cancel" class="btn secondary" type="button" data-close="lane-dialog">Cancelar</button>
+          <button value="default" class="btn primary" type="submit">Guardar carril</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog id="task-dialog" class="dialog">
+      <form id="task-form" method="dialog" class="dialog-form task-form">
+        <h2>Nueva tarea</h2>
+
+        <label>
+          Nombre de la tarea
+          <input name="title" type="text" required maxlength="80" />
+        </label>
+
+        <label>
+          Persona asignada
+          <input name="assignee" type="text" maxlength="60" />
+        </label>
+
+        <label>
+          Fecha inicio
+          <input name="startDate" type="date" />
+        </label>
+
+        <label>
+          Fecha fin
+          <input name="endDate" type="date" />
+        </label>
+
+        <label>
+          Fecha bloqueo
+          <input name="blockedDate" type="date" />
+        </label>
+
+        <label>
+          Estado (carril)
+          <select name="status" id="task-status" required></select>
+        </label>
+
+        <label>
+          Comentarios
+          <textarea name="comments" rows="3" maxlength="240" placeholder="Detalle adicional..."></textarea>
+        </label>
+
+        <label>
+          Archivos adjuntos
+          <input name="attachments" type="file" multiple />
+          <small>Se almacenarán los nombres de archivo en la tarjeta.</small>
+        </label>
+
+        <menu>
+          <button value="cancel" class="btn secondary" type="button" data-close="task-dialog">Cancelar</button>
+          <button value="default" class="btn primary" type="submit">Guardar tarea</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <template id="task-template">
+      <article class="task-card">
+        <h3 class="task-title"></h3>
+        <dl class="task-metadata"></dl>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
